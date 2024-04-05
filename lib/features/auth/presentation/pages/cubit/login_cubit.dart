@@ -8,7 +8,7 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepository loginRepository;
 
-  LoginCubit(this.loginRepository)
+  LoginCubit({required this.loginRepository})
       : super(
           LoginState(status: LoginStatus.initial),
         );

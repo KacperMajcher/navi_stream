@@ -15,6 +15,7 @@ dependencies:
   dio: ^5.4.2+1
   injectable: ^2.3.5
   shared_preferences: ^2.2.2
+  get_it: ^7.6.7
   
 
 dev_dependencies:
