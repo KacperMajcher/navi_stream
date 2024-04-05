@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:navi_stream/features/presentation/pages/home_page.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({
     super.key,
+    required this.onPressed,
   });
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => const HomePage()));
-      },
+      onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
       ),
