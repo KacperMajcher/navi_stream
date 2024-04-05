@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navi_stream/core/constants/constants.dart';
 import 'package:navi_stream/core/constants/enums.dart';
+import 'package:navi_stream/features/auth/data/data_source/login_data_source.dart';
+import 'package:navi_stream/features/auth/data/repositories/login_repository.dart';
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_cubit.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/login_button.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/login_input_field.dart';
@@ -20,7 +22,7 @@ class LoginPage extends StatelessWidget {
     final passwordController = TextEditingController(text: password);
 
     return BlocProvider(
-      create: (context) => LoginCubit(),
+      create: (context) => LoginCubit(LoginRepository(LoginDataSource())),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Login Page'),
@@ -55,7 +57,6 @@ class LoginPage extends StatelessWidget {
                           content: Text(state.error),
                         ),
                       );
-                      print(state.error);
                     }
                   },
                   builder: (context, state) {
