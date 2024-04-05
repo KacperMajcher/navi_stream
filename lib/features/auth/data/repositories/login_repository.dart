@@ -1,0 +1,14 @@
+import 'package:injectable/injectable.dart';
+import 'package:navi_stream/features/auth/data/data_source/login_data_source.dart';
+import 'package:navi_stream/features/auth/data/models/login_model.dart';
+
+@injectable
+class LoginRepository {
+  final LoginDataSource dataSource;
+
+  LoginRepository(this.dataSource);
+
+  Future<String> login(LoginModel loginModel) async {
+    return await dataSource.login(loginModel);
+  }
+}
