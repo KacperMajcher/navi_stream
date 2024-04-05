@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navi_stream/core/constants/constants.dart';
 import 'package:navi_stream/features/auth/data/models/login_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:retrofit/retrofit.dart';
 
+@RestApi()
 class LoginDataSource {
   Future<String> login(LoginModel loginModel) async {
     const url = apiBaseURL + endpointLogin;
@@ -36,12 +38,10 @@ class LoginDataSource {
   }
 
   Future<void> _saveToken(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('access_token', token);
+    await const FlutterSecureStorage().write(key: 'access_token', value: token);
   }
 
   Future<void> _saveUsername(String username) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('username', username);
+    await const FlutterSecureStorage().write(key: 'username', value: username);
   }
 }

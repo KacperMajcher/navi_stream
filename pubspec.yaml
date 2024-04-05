@@ -14,14 +14,17 @@ dependencies:
   flutter_bloc: ^8.1.5
   dio: ^5.4.2+1
   injectable: ^2.3.5
-  shared_preferences: ^2.2.2
   get_it: ^7.6.7
+  retrofit: ^4.1.0
+  flutter_secure_storage: ^4.2.1
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  injectable_generator: ^2.4.1
+  build_runner: ^2.4.9
 
 
 flutter:
