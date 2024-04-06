@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:navi_stream/app/injection_container.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/auth/data/models/login_model.dart';
 import 'package:navi_stream/features/auth/data/models/login_response.dart';
@@ -39,7 +40,7 @@ class LoginCubit extends Cubit<LoginState> {
             status: LoginStatus.success,
           ),
         );
-        HomeCubit().update(
+        HomeCubit(getIt()).update(
           response.ouid,
           response.userId,
           response.token,
