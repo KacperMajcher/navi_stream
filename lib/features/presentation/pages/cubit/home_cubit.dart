@@ -1,19 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:navi_stream/features/presentation/data/models/channel_model.dart';
 import 'package:navi_stream/features/presentation/data/models/package_model.dart';
+import 'package:navi_stream/features/presentation/data/repositories/channel_repository.dart';
 import 'package:navi_stream/features/presentation/data/repositories/home_repository.dart';
 
 part 'home_state.dart';
 
-@injectable
 class HomeCubit extends Cubit<HomeState> {
-  final HomeRepository homeRepository;
+  HomeCubit(
+    this.homeRepository,
+    this.channelsRepository,
+  ) : super(HomeState());
 
-  HomeCubit(this.homeRepository)
-      : super(
-          HomeState(),
-        );
+  final HomeRepository homeRepository;
+  final ChannelsRepository channelsRepository;
 
   // save necessary data for fetching packages
   void update(String ouid, String userId, String token) {
@@ -64,9 +64,11 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> getChannels() async {
-    final channelModel = ChannelModel(
-        channelName: 'Canal+ Sport', channelLogo: 'assets/logo_test.jpg');
+  Future<void> getChannelModel() async {
+    emit(
+      HomeState(),
+    );
+    final channelModel = await channelsRepository.getChannelModel();
     emit(
       HomeState(
         channelModel: channelModel,

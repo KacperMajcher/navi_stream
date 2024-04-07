@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 import 'package:navi_stream/features/presentation/data/data_sources/home_remote_data_source.dart';
 
-@injectable
 class HomeRepository {
   final HomeRemoteDioDataSource dataSource;
 
