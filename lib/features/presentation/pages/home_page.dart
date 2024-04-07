@@ -1,29 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:navi_stream/features/presentation/data/data_sources/home_remote_data_source.dart';
+import 'package:navi_stream/features/presentation/data/repositories/home_repository.dart';
 import 'package:navi_stream/features/presentation/pages/channel.dart';
+import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Channels'),
-      ),
-      body: const Center(
-        child: Column(
-          children: [
-            Text(
-              'Welcome to the application, you have logged in.\nThats your channels',
-              textAlign: TextAlign.center,
+    return BlocProvider(
+      create: (context) => HomeCubit(HomeRepository(HomeRemoteDioDataSource())),
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: const Text('Channels'),
             ),
-            Channel(
-              channelName: 'Canal+ Sport',
-              channelLogo: 'assets/logo_test.jpg',
-            )
-          ],
-        ),
+            body: Center(
+              child: Column(
+                children: [
+                  const Text(
+                    'Welcome to the application, you have logged in.\nThats your channels',
+                    textAlign: TextAlign.center,
+                  ),
+                  Channel(
+                    channelName: state.channelName,
+                    channelLogo: state.channelLogo,
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

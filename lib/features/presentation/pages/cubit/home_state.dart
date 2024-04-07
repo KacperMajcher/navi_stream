@@ -13,6 +13,9 @@ class HomeState {
   final String? token;
   List<Package> packages;
 
+  final String channelName = 'Canal+ Cinema';
+  final String channelLogo = 'assets/logo_test.jpg';
+
   void updatePackages(List<Package> newPackages) {
     packages = newPackages;
   }
