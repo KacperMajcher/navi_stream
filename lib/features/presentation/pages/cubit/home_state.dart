@@ -2,11 +2,18 @@ part of 'home_cubit.dart';
 
 class HomeState {
   HomeState({
-    required this.ouid,
-    required this.userId,
-    required this.token,
+    this.ouid,
+    this.userId,
+    this.token,
+    this.packages = const [],
   });
-  final String ouid;
-  final String userId;
-  final String token;
+
+  final String? ouid;
+  final String? userId;
+  final String? token;
+  List<Package> packages;
+
+  void updatePackages(List<Package> newPackages) {
+    packages = newPackages;
+  }
 }
