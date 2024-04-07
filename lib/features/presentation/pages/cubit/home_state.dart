@@ -6,7 +6,7 @@ class HomeState {
     this.userId,
     this.token,
     this.packages = const [],
-    this.channelModel,
+    this.channelModel = const [],
   });
 
   final String? ouid;
@@ -14,7 +14,7 @@ class HomeState {
   final String? token;
   List<Package> packages;
 
-  final ChannelModel? channelModel;
+  final List<ChannelModel> channelModel;
 
   void updatePackages(List<Package> newPackages) {
     packages = newPackages;

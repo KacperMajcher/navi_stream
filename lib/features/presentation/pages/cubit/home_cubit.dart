@@ -68,7 +68,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       HomeState(),
     );
-    final channelModel = await channelsRepository.getChannelModel();
+    final channelModel = await channelsRepository.getChannelModels();
     emit(
       HomeState(
         channelModel: channelModel,

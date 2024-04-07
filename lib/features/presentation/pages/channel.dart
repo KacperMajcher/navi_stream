@@ -14,7 +14,7 @@ class Channel extends StatelessWidget {
     final double dh = MediaQuery.of(context).size.height;
     final double dw = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.all(dh * .03),
+      padding: EdgeInsets.symmetric(horizontal: dw * .03),
       child: Card(
         color: Colors.white,
         child: Row(
