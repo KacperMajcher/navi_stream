@@ -11,9 +11,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(HomeRepository(HomeRemoteDioDataSource())),
+      create: (context) =>
+          HomeCubit(HomeRepository(HomeRemoteDioDataSource()))..getChannels(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
+          final channelModel = state.channelModel;
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -26,10 +28,7 @@ class HomePage extends StatelessWidget {
                     'Welcome to the application, you have logged in.\nThats your channels',
                     textAlign: TextAlign.center,
                   ),
-                  Channel(
-                    channelName: state.channelName,
-                    channelLogo: state.channelLogo,
-                  )
+                  Channel(channelModel: channelModel!)
                 ],
               ),
             ),

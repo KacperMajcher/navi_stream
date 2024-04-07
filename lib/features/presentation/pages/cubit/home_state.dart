@@ -6,6 +6,7 @@ class HomeState {
     this.userId,
     this.token,
     this.packages = const [],
+    this.channelModel,
   });
 
   final String? ouid;
@@ -13,8 +14,7 @@ class HomeState {
   final String? token;
   List<Package> packages;
 
-  final String channelName = 'Canal+ Cinema';
-  final String channelLogo = 'assets/logo_test.jpg';
+  final ChannelModel? channelModel;
 
   void updatePackages(List<Package> newPackages) {
     packages = newPackages;

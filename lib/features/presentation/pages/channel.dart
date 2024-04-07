@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:navi_stream/features/presentation/data/models/channel_model.dart';
 
 class Channel extends StatelessWidget {
   const Channel({
     Key? key,
-    required this.channelName,
-    required this.channelLogo,
+    required this.channelModel,
   }) : super(key: key);
 
-  final String channelName;
-  final String channelLogo;
+  final ChannelModel channelModel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class Channel extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(dh * 0.01),
               child: Image.asset(
-                channelLogo,
+                channelModel.channelLogo,
                 height: dh * 0.055,
                 width: dw * 0.11,
                 fit: BoxFit.cover,
@@ -31,7 +30,7 @@ class Channel extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                channelName,
+                channelModel.channelName,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
