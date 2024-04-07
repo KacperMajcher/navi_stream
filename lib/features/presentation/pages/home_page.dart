@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navi_stream/features/presentation/pages/channel.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,10 +9,21 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Home page'),
+        title: const Text('Channels'),
       ),
       body: const Center(
-        child: Text('Welcome to the application, you have logged in'),
+        child: Column(
+          children: [
+            Text(
+              'Welcome to the application, you have logged in.\nThats your channels',
+              textAlign: TextAlign.center,
+            ),
+            Channel(
+              channelName: 'Canal+ Sport',
+              channelLogo: 'assets/logo_test.jpg',
+            )
+          ],
+        ),
       ),
     );
   }
