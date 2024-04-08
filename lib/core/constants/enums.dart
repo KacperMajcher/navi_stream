@@ -5,3 +5,10 @@ enum LoginStatus {
   error,
   firstLogin,
 }
+
+enum Status {
+  initial,
+  loading,
+  success,
+  error,
+}
