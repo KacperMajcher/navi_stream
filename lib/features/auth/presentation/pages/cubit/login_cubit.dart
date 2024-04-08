@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:navi_stream/app/injection_container.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/auth/data/models/login_model.dart';
 import 'package:navi_stream/features/auth/data/models/login_response.dart';
 import 'package:navi_stream/features/auth/data/repositories/login_repository.dart';
-import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 part 'login_state.dart';
 
@@ -33,15 +32,15 @@ class LoginCubit extends Cubit<LoginState> {
       final LoginResponse? response = await loginRepository.login(loginModel);
 
       if (response != null) {
+        saveToStorage(
+          response.ouid,
+          response.userId,
+          response.token,
+        );
         emit(
           LoginState(
             status: LoginStatus.success,
           ),
-        );
-        getIt<HomeCubit>().update(
-          response.ouid,
-          response.userId,
-          response.token,
         );
       }
     } catch (e) {
@@ -53,4 +52,11 @@ class LoginCubit extends Cubit<LoginState> {
       );
     }
   }
+}
+
+Future<void> saveToStorage(String ouid, String userId, String token) async {
+  const storage = FlutterSecureStorage();
+  await storage.write(key: 'ouid', value: ouid);
+  await storage.write(key: 'userId', value: userId);
+  await storage.write(key: 'token', value: token);
 }
