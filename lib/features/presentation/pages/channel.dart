@@ -16,16 +16,25 @@ class Channel extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: dw * .03),
       child: Card(
-        color: Colors.white,
         child: Row(
           children: [
             Padding(
               padding: EdgeInsets.all(dh * 0.01),
-              child: Image.asset(
-                channelModel.channelLogo ?? '',
+              child: Image.network(
+                channelModel.channelLogo,
                 height: dh * 0.055,
                 width: dw * 0.11,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
+
+                // default image in case of an error loading the network image
+                errorBuilder: (context, exception, stackTrace) {
+                  return Image.asset(
+                    'assets/logo_test.jpg',
+                    height: dh * 0.055,
+                    width: dw * 0.11,
+                    fit: BoxFit.contain,
+                  );
+                },
               ),
             ),
             Expanded(

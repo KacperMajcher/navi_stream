@@ -20,9 +20,9 @@ ChannelModel _$ChannelModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ChannelModel {
-  @JsonKey(name: 'name')
   String get channelName => throw _privateConstructorUsedError;
-  String? get channelLogo => throw _privateConstructorUsedError;
+  int? get logoId => throw _privateConstructorUsedError;
+  String get channelLogo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $ChannelModelCopyWith<$Res> {
           ChannelModel value, $Res Function(ChannelModel) then) =
       _$ChannelModelCopyWithImpl<$Res, ChannelModel>;
   @useResult
-  $Res call({@JsonKey(name: 'name') String channelName, String? channelLogo});
+  $Res call({String channelName, int? logoId, String channelLogo});
 }
 
 /// @nodoc
@@ -53,17 +53,22 @@ class _$ChannelModelCopyWithImpl<$Res, $Val extends ChannelModel>
   @override
   $Res call({
     Object? channelName = null,
-    Object? channelLogo = freezed,
+    Object? logoId = freezed,
+    Object? channelLogo = null,
   }) {
     return _then(_value.copyWith(
       channelName: null == channelName
           ? _value.channelName
           : channelName // ignore: cast_nullable_to_non_nullable
               as String,
-      channelLogo: freezed == channelLogo
+      logoId: freezed == logoId
+          ? _value.logoId
+          : logoId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      channelLogo: null == channelLogo
           ? _value.channelLogo
           : channelLogo // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -76,7 +81,7 @@ abstract class _$$ChannelModelImplCopyWith<$Res>
       __$$ChannelModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'name') String channelName, String? channelLogo});
+  $Res call({String channelName, int? logoId, String channelLogo});
 }
 
 /// @nodoc
@@ -91,17 +96,22 @@ class __$$ChannelModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? channelName = null,
-    Object? channelLogo = freezed,
+    Object? logoId = freezed,
+    Object? channelLogo = null,
   }) {
     return _then(_$ChannelModelImpl(
-      null == channelName
+      channelName: null == channelName
           ? _value.channelName
           : channelName // ignore: cast_nullable_to_non_nullable
               as String,
-      freezed == channelLogo
+      logoId: freezed == logoId
+          ? _value.logoId
+          : logoId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      channelLogo: null == channelLogo
           ? _value.channelLogo
           : channelLogo // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -109,20 +119,24 @@ class __$$ChannelModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ChannelModelImpl implements _ChannelModel {
-  _$ChannelModelImpl(@JsonKey(name: 'name') this.channelName, this.channelLogo);
+  _$ChannelModelImpl(
+      {required this.channelName,
+      required this.logoId,
+      required this.channelLogo});
 
   factory _$ChannelModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChannelModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'name')
   final String channelName;
   @override
-  final String? channelLogo;
+  final int? logoId;
+  @override
+  final String channelLogo;
 
   @override
   String toString() {
-    return 'ChannelModel(channelName: $channelName, channelLogo: $channelLogo)';
+    return 'ChannelModel(channelName: $channelName, logoId: $logoId, channelLogo: $channelLogo)';
   }
 
   @override
@@ -132,13 +146,15 @@ class _$ChannelModelImpl implements _ChannelModel {
             other is _$ChannelModelImpl &&
             (identical(other.channelName, channelName) ||
                 other.channelName == channelName) &&
+            (identical(other.logoId, logoId) || other.logoId == logoId) &&
             (identical(other.channelLogo, channelLogo) ||
                 other.channelLogo == channelLogo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, channelName, channelLogo);
+  int get hashCode =>
+      Object.hash(runtimeType, channelName, logoId, channelLogo);
 
   @JsonKey(ignore: true)
   @override
@@ -155,17 +171,20 @@ class _$ChannelModelImpl implements _ChannelModel {
 }
 
 abstract class _ChannelModel implements ChannelModel {
-  factory _ChannelModel(@JsonKey(name: 'name') final String channelName,
-      final String? channelLogo) = _$ChannelModelImpl;
+  factory _ChannelModel(
+      {required final String channelName,
+      required final int? logoId,
+      required final String channelLogo}) = _$ChannelModelImpl;
 
   factory _ChannelModel.fromJson(Map<String, dynamic> json) =
       _$ChannelModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'name')
   String get channelName;
   @override
-  String? get channelLogo;
+  int? get logoId;
+  @override
+  String get channelLogo;
   @override
   @JsonKey(ignore: true)
   _$$ChannelModelImplCopyWith<_$ChannelModelImpl> get copyWith =>

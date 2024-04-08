@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:navi_stream/core/constants/constants.dart';
+import 'package:navi_stream/features/presentation/data/models/channel_dto.dart';
 import 'package:navi_stream/features/presentation/data/models/channel_model.dart';
 
 class ChannelsRemoteDataSource {
@@ -16,13 +17,13 @@ class ChannelsRemoteDataSource {
 
       if (response.statusCode == 200) {
         final List<dynamic> channelsData = response.data['data'];
-
-        final data = channelsData
-            .map<ChannelModel>(
-                (channelData) => ChannelModel.fromJson(channelData))
+        final List<ChannelDTO> channelDTOs = channelsData
+            .map<ChannelDTO>((json) => ChannelDTO.fromJson(json))
             .toList();
+        final List<ChannelModel> channelModels =
+            channelDTOs.map<ChannelModel>((dto) => dto.toDomain()).toList();
 
-        return data;
+        return channelModels;
       } else if (response.statusCode == 401) {
         throw Exception('Unauthorized access.');
       } else {
