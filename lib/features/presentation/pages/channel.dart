@@ -22,7 +22,7 @@ class Channel extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(dh * 0.01),
               child: Image.asset(
-                channelModel.channelLogo,
+                channelModel.channelLogo ?? '',
                 height: dh * 0.055,
                 width: dw * 0.11,
                 fit: BoxFit.cover,
