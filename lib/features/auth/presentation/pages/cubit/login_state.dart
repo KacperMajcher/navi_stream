@@ -1,11 +1,16 @@
-part of 'login_cubit.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:navi_stream/core/constants/enums.dart';
 
-class LoginState {
-  LoginState({
-    required this.status,
-    this.error = '',
-  });
+part 'login_state.freezed.dart';
+part 'login_state.g.dart';
 
-  final LoginStatus status;
-  final String error;
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState({
+    @Default(LoginStatus.initial) LoginStatus status,
+    String? error,
+  }) = _LoginState;
+
+  factory LoginState.fromJson(Map<String, dynamic> json) =>
+      _$LoginStateFromJson(json);
 }

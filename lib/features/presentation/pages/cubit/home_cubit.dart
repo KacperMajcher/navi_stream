@@ -1,52 +1,43 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
-import 'package:navi_stream/features/presentation/data/repositories/home_repository.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:navi_stream/core/constants/enums.dart';
+import 'package:navi_stream/features/presentation/pages/cubit/channels_cubit.dart';
+import 'package:navi_stream/features/presentation/pages/cubit/home_state.dart';
+import 'package:navi_stream/features/presentation/pages/cubit/packages_cubit.dart';
 
-part 'home_state.dart';
-
-@injectable
 class HomeCubit extends Cubit<HomeState> {
-  final HomeRepository homeRepository;
-
-  HomeCubit(this.homeRepository)
-      : super(
-          HomeState(
-            ouid: '',
-            userId: '',
-            token: '',
-          ),
+  HomeCubit({
+    required this.packagesCubit,
+    required this.channelsCubit,
+  }) : super(
+          const HomeState(status: Status.loading),
         );
-  // save necessary data for fetching packages
-  void update(String ouid, String userId, String token) {
-    emit(
-      HomeState(
-        ouid: ouid,
-        userId: userId,
-        token: token,
-      ),
-    );
-    fetchPackages();
-  }
+  final PackagesCubit packagesCubit;
+  final ChannelsCubit channelsCubit;
+  final storage = const FlutterSecureStorage();
 
-  Future<void> fetchPackages() async {
-    final String token = state.token;
-    final String ouid = state.ouid;
-    final String userId = state.userId;
+  Future<void> init() async {
+    final String? token = await storage.read(key: 'token');
+    final String? ouid = await storage.read(key: 'ouid');
+    final String? userId = await storage.read(key: 'userId');
 
-    // check if uid and ouid are definitely not null
-    if (ouid.isEmpty || userId.isEmpty) {
-      return;
-    }
-
-    try {
-      final response = await homeRepository.fetchPackages(
+    if (token != null && ouid != null && userId != null) {
+      await packagesCubit.fetchPackages(
         ouid,
         userId,
         token,
       );
-    } catch (e) {
-      // ignore: avoid_print
-      print('Error: $e');
+      final packageIds =
+          packagesCubit.state.packages.map((package) => package.id).toList();
+      await channelsCubit.getChannelModels(
+        token,
+        ouid,
+        packageIds,
+      );
+      emit(HomeState(
+        status: Status.success,
+        channelModel: channelsCubit.state.channelModel,
+      ));
     }
   }
 }

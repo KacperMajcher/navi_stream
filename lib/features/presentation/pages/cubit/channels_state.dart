@@ -2,15 +2,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/presentation/data/models/channel_model.dart';
 
-part 'home_state.freezed.dart';
-part 'home_state.g.dart';
+part 'channels_state.freezed.dart';
+part 'channels_state.g.dart';
 
 @freezed
-class HomeState with _$HomeState {
-  const factory HomeState({
+class ChannelsState with _$ChannelsState {
+  const factory ChannelsState({
     @Default(Status.loading) Status status,
     @Default([]) List<ChannelModel> channelModel,
-  }) = _HomeState;
+  }) = _ChannelsState;
 
-  factory HomeState.fromJson(Map<String, dynamic> json) => _$HomeStateFromJson(json);
+  factory ChannelsState.fromJson(Map<String, dynamic> json) => _$ChannelsStateFromJson(json);
 }

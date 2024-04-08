@@ -4,9 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:navi_stream/core/constants/constants.dart';
 import 'package:navi_stream/features/auth/data/models/login_model.dart';
 import 'package:navi_stream/features/auth/data/models/login_response.dart';
-import 'package:retrofit/retrofit.dart';
 
-@RestApi()
 class LoginDataSource {
   Future<LoginResponse?> login(LoginModel loginModel) async {
     const url = apiBaseURL + endpointLogin;
@@ -22,7 +20,7 @@ class LoginDataSource {
         final userId = response.data['data']['user_id'];
 
         if (token != null) {
-          // "sve necessary data for displaying channels
+          // save necessary data for displaying channels
           return LoginResponse(
             token,
             ouid,

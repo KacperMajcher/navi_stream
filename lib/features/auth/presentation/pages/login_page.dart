@@ -6,6 +6,7 @@ import 'package:navi_stream/app/injection_container.dart';
 import 'package:navi_stream/core/constants/constants.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_cubit.dart';
+import 'package:navi_stream/features/auth/presentation/pages/cubit/login_state.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/login_button.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/login_input_field.dart';
 import 'package:navi_stream/features/presentation/pages/home_page.dart';
@@ -53,7 +54,7 @@ class LoginPage extends StatelessWidget {
                     } else if (state.status == LoginStatus.error) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(state.error),
+                          content: Text(state.error!),
                         ),
                       );
                     }

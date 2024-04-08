@@ -1,14 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:navi_stream/core/constants/constants.dart';
-import 'package:retrofit/retrofit.dart';
 
-@RestApi()
-class HomeRemoteDioDataSource {
+class PackagesRemoteDioDataSource {
   Future<Response<dynamic>> fetchPackages(
-    String ouid,
-    String userId,
-    String token,
-  ) async {
+      String ouid, String userId, String token) async {
     try {
       final response = await Dio().get<dynamic>(
         "${apiBaseURL}v1/$ouid/users/$userId/packages",

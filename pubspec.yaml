@@ -17,7 +17,9 @@ dependencies:
   get_it: ^7.6.7
   retrofit: ^4.1.0
   flutter_secure_storage: ^4.2.1
-  
+  json_annotation: ^4.8.1
+  freezed_annotation: ^2.4.1
+
 
 dev_dependencies:
   flutter_test:
@@ -25,8 +27,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   injectable_generator: ^2.4.1
   build_runner: ^2.4.9
-
+  retrofit_generator: ^8.1.0
+  json_serializable: ^6.7.1
+  freezed: ^2.5.1
 
 flutter:
   uses-material-design: true
-
+  assets:
+  - assets/
