@@ -16,7 +16,7 @@ void configureDependencies() {
   //Bloc (cubit)
   getIt.registerFactory(() => LoginCubit(loginRepository: getIt()));
   getIt.registerFactory(
-      () => HomeCubit(PackagesCubit(getIt()), ChannelsCubit(getIt())));
+      () => HomeCubit(channelsCubit: getIt(), packagesCubit: getIt()));
   getIt.registerFactory(() => ChannelsCubit(getIt()));
   getIt.registerFactory(() => PackagesCubit(getIt()));
 
@@ -29,5 +29,4 @@ void configureDependencies() {
   getIt.registerFactory(() => LoginDataSource());
   getIt.registerFactory(() => PackagesRemoteDioDataSource());
   getIt.registerFactory(() => ChannelsRemoteDataSource());
-
 }

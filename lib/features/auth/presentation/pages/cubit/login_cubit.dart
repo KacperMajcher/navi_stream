@@ -4,8 +4,7 @@ import 'package:navi_stream/features/auth/data/models/login_model.dart';
 import 'package:navi_stream/features/auth/data/models/login_response.dart';
 import 'package:navi_stream/features/auth/data/repositories/login_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-part 'login_state.dart';
+import 'package:navi_stream/features/auth/presentation/pages/cubit/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepository loginRepository;
@@ -13,14 +12,14 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({
     required this.loginRepository,
   }) : super(
-          LoginState(
+          const LoginState(
             status: LoginStatus.initial,
           ),
         );
 
   Future<void> login(String username, String password) async {
     emit(
-      LoginState(
+      const LoginState(
         status: LoginStatus.connecting,
       ),
     );
@@ -32,13 +31,13 @@ class LoginCubit extends Cubit<LoginState> {
       final LoginResponse? response = await loginRepository.login(loginModel);
 
       if (response != null) {
-        saveToStorage(
+        await saveToStorage(
           response.ouid,
           response.userId,
           response.token,
         );
         emit(
-          LoginState(
+          const LoginState(
             status: LoginStatus.success,
           ),
         );

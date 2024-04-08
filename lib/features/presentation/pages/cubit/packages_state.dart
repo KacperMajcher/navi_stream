@@ -5,6 +5,6 @@ class PackagesState {
     this.status, {
     this.packages = const [],
   });
-  final List<Package> packages;
+  final List<PackageModel> packages;
   final Status status;
 }

@@ -7,7 +7,7 @@ class PackagesRepository {
 
   PackagesRepository(this.dataSource);
 
-  Future<List<Package>> fetchPackages(
+  Future<List<PackageModel>> fetchPackages(
     String ouid,
     String userId,
     String token,
@@ -24,11 +24,11 @@ class PackagesRepository {
         final List<dynamic> packageList = response.data['data'];
 
         // transfrom json list into models
-        final List<Package> packages =
-            packageList.map((data) => Package.fromJson(data)).toList();
+        final List<PackageModel> packages =
+            packageList.map((data) => PackageModel.fromJson(data)).toList();
 
         // filter packages, we dont need non purchased packages
-        final List<Package> purchasedPackages =
+        final List<PackageModel> purchasedPackages =
             packages.where((package) => package.purchased != null).toList();
         return purchasedPackages;
       } else {
