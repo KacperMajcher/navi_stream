@@ -10,6 +10,7 @@ import 'package:navi_stream/features/auth/presentation/pages/cubit/login_state.d
 import 'package:navi_stream/features/auth/presentation/widgets/login_button.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/login_input_field.dart';
 import 'package:navi_stream/features/presentation/pages/home_page.dart';
+import 'package:navi_stream/features/widgets/custom_app_bar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -24,9 +25,7 @@ class LoginPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<LoginCubit>(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Login Page'),
-        ),
+        appBar: const CustomAppBar(),
         body: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: dw * .01),
