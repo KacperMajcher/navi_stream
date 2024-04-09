@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:navi_stream/app/injection_container.dart';
 import 'package:navi_stream/features/presentation/pages/widgets/bottom_navigation_bar.dart';
 import 'package:navi_stream/features/presentation/pages/widgets/channel.dart';
@@ -19,14 +17,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _filterController = TextEditingController();
-  bool _isSearching = false;
+  final FocusNode _focusNode = FocusNode();
+  bool _isSearchBarFocused = false;
 
   @override
   void initState() {
     super.initState();
-    _filterController.addListener(() {
+    _focusNode.addListener(() {
       setState(() {
-        _isSearching = _filterController.text.isNotEmpty;
+        _isSearchBarFocused = _focusNode.hasFocus;
       });
     });
   }
@@ -51,12 +50,13 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(height: dh * .02),
                       CustomSearchBar(
                         controller: _filterController,
+                        focusNode: _focusNode,
                         onSearchChanged: (value) {
                           context.read<HomeCubit>().filterChannels(value);
                         },
                       ),
                       SizedBox(height: dh * .02),
-                      if (!_isSearching) ...[
+                      if (!_isSearchBarFocused) ...[
                         Text(
                           'Recommended',
                           style:
@@ -77,6 +77,10 @@ class _HomePageState extends State<HomePage> {
                           final channelModel = state.channelModel[index];
                           return Channel(channelModel: channelModel);
                         },
+                      ),
+                      const Divider(
+                        color: Color(0xFFC9CACF),
+                        thickness: 1,
                       ),
                     ],
                   ),
@@ -113,6 +117,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     _filterController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 }

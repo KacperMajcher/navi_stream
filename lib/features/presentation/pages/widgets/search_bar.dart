@@ -6,10 +6,12 @@ class CustomSearchBar extends StatefulWidget {
     Key? key,
     required this.controller,
     required this.onSearchChanged,
+    required this.focusNode,
   }) : super(key: key);
 
   final TextEditingController controller;
   final Function(String) onSearchChanged;
+  final FocusNode focusNode;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -51,6 +53,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       ),
       child: TextField(
         controller: widget.controller,
+        focusNode: widget.focusNode,
         decoration: InputDecoration(
           hintText: 'Search channel, game, etc...',
           prefixIcon: const Image(
