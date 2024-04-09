@@ -40,4 +40,26 @@ class HomeCubit extends Cubit<HomeState> {
       ));
     }
   }
+
+  void filterChannels(String value) {
+    if (value.isEmpty) {
+      emit(
+        HomeState(
+          status: Status.success,
+          channelModel: channelsCubit.state.channelModel,
+        ),
+      );
+    } else {
+      final filteredChannels = channelsCubit.state.channelModel
+          .where((channel) =>
+              channel.channelName.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+      emit(
+        HomeState(
+          status: Status.success,
+          channelModel: filteredChannels,
+        ),
+      );
+    }
+  }
 }
