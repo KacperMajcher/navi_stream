@@ -8,8 +8,9 @@ class LoginResponse with _$LoginResponse {
   const factory LoginResponse({
     required String token,
     required String ouid,
-    required String userId,
+    @JsonKey(name: 'user_id') required String userId,
   }) = _LoginResponse;
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
+  factory LoginResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoginResponseFromJson(json);
 }

@@ -22,6 +22,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
 mixin _$LoginResponse {
   String get token => throw _privateConstructorUsedError;
   String get ouid => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ abstract class $LoginResponseCopyWith<$Res> {
           LoginResponse value, $Res Function(LoginResponse) then) =
       _$LoginResponseCopyWithImpl<$Res, LoginResponse>;
   @useResult
-  $Res call({String token, String ouid, String userId});
+  $Res call(
+      {String token, String ouid, @JsonKey(name: 'user_id') String userId});
 }
 
 /// @nodoc
@@ -81,7 +83,8 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
       __$$LoginResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, String ouid, String userId});
+  $Res call(
+      {String token, String ouid, @JsonKey(name: 'user_id') String userId});
 }
 
 /// @nodoc
@@ -120,7 +123,9 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoginResponseImpl implements _LoginResponse {
   const _$LoginResponseImpl(
-      {required this.token, required this.ouid, required this.userId});
+      {required this.token,
+      required this.ouid,
+      @JsonKey(name: 'user_id') required this.userId});
 
   factory _$LoginResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginResponseImplFromJson(json);
@@ -130,6 +135,7 @@ class _$LoginResponseImpl implements _LoginResponse {
   @override
   final String ouid;
   @override
+  @JsonKey(name: 'user_id')
   final String userId;
 
   @override
@@ -167,9 +173,10 @@ class _$LoginResponseImpl implements _LoginResponse {
 
 abstract class _LoginResponse implements LoginResponse {
   const factory _LoginResponse(
-      {required final String token,
-      required final String ouid,
-      required final String userId}) = _$LoginResponseImpl;
+          {required final String token,
+          required final String ouid,
+          @JsonKey(name: 'user_id') required final String userId}) =
+      _$LoginResponseImpl;
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
       _$LoginResponseImpl.fromJson;
@@ -179,6 +186,7 @@ abstract class _LoginResponse implements LoginResponse {
   @override
   String get ouid;
   @override
+  @JsonKey(name: 'user_id')
   String get userId;
   @override
   @JsonKey(ignore: true)

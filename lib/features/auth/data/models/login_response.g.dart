@@ -10,12 +10,12 @@ _$LoginResponseImpl _$$LoginResponseImplFromJson(Map<String, dynamic> json) =>
     _$LoginResponseImpl(
       token: json['token'] as String,
       ouid: json['ouid'] as String,
-      userId: json['userId'] as String,
+      userId: json['user_id'] as String,
     );
 
 Map<String, dynamic> _$$LoginResponseImplToJson(_$LoginResponseImpl instance) =>
     <String, dynamic>{
       'token': instance.token,
       'ouid': instance.ouid,
-      'userId': instance.userId,
+      'user_id': instance.userId,
     };

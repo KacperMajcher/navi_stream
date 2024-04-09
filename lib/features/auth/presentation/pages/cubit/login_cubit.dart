@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:navi_stream/core/constants/constants.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/auth/data/models/login_model.dart';
 import 'package:navi_stream/features/auth/data/models/login_response.dart';
@@ -25,23 +26,23 @@ class LoginCubit extends Cubit<LoginState> {
     );
     try {
       final loginModel = LoginModel(
+        loginType: loginType,
         username: username,
         password: password,
+        device: device,
       );
-      final LoginResponse? response = await loginRepository.login(loginModel);
+      final LoginResponse response = await loginRepository.login(loginModel);
 
-      if (response != null) {
-        await saveToStorage(
-          response.ouid,
-          response.userId,
-          response.token,
-        );
-        emit(
-          const LoginState(
-            status: LoginStatus.success,
-          ),
-        );
-      }
+      await saveToStorage(
+        response.ouid,
+        response.userId,
+        response.token,
+      );
+      emit(
+        const LoginState(
+          status: LoginStatus.success,
+        ),
+      );
     } catch (e) {
       emit(
         LoginState(
