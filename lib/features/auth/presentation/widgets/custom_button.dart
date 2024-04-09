@@ -6,11 +6,12 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.color,
     required this.text,
-    required this.onPressed,
+    this.onPressed,
   });
+
   final Color color;
   final String text;
-  final Function() onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class CustomButton extends StatelessWidget {
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
           EdgeInsets.symmetric(
             vertical: dh * .01,
-            horizontal: dw * .4,
+            horizontal: dw * .39,
           ),
         ),
       ),
@@ -37,12 +38,11 @@ class CustomButton extends StatelessWidget {
         text,
         style: GoogleFonts.inter(
           textStyle: TextStyle(
-            color: Colors.white,
-            fontSize: dh * .0175,
-          ),
+              color: Colors.white,
+              fontSize: dh * .0175,
+              fontWeight: FontWeight.w600),
         ),
       ),
     );
   }
 }
-

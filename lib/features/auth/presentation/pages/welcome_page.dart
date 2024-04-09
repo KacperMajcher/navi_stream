@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:navi_stream/app/injection_container.dart';
+import 'package:navi_stream/features/auth/presentation/pages/cubit/login_cubit.dart';
 import 'package:navi_stream/features/auth/presentation/pages/login_page.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/custom_button.dart';
 
@@ -33,7 +36,10 @@ class WelcomePage extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => const LoginPage(),
+                  builder: (context) => BlocProvider<LoginCubit>(
+                    create: (context) => getIt<LoginCubit>(),
+                    child: const LoginPage(),
+                  ),
                 ),
               );
             },

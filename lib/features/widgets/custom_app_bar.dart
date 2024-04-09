@@ -25,7 +25,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
           image: AssetImage('assets/back_icon.png'),
         ),
       ),
-      automaticallyImplyLeading: false,
       title: Stack(
         children: [
           Row(
