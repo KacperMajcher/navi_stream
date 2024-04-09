@@ -1,16 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navi_stream/core/constants/enums.dart';
-import 'package:navi_stream/features/presentation/data/models/package_model.dart';
 import 'package:navi_stream/features/presentation/data/repositories/packages_repository.dart';
-
-part 'packages_state.dart';
+import 'package:navi_stream/features/presentation/pages/cubit/packages_state.dart';
 
 class PackagesCubit extends Cubit<PackagesState> {
   final PackagesRepository packagesRepository;
 
   PackagesCubit(this.packagesRepository)
       : super(
-          PackagesState(Status.loading),
+          const PackagesState(status: Status.loading),
         );
 
   Future<void> fetchPackages(
@@ -25,7 +23,7 @@ class PackagesCubit extends Cubit<PackagesState> {
     );
     emit(
       PackagesState(
-        Status.success,
+        status: Status.success,
         packages: packages,
       ),
     );

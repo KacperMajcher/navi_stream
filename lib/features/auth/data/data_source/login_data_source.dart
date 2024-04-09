@@ -22,9 +22,9 @@ class LoginDataSource {
         if (token != null) {
           // save necessary data for displaying channels
           return LoginResponse(
-            token,
-            ouid,
-            userId.toString(),
+            token: token,
+            ouid: ouid,
+            userId: userId.toString(),
           );
 
           // handle dio errors
