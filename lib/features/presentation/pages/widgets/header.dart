@@ -10,7 +10,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final double dh = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.only(top: dh * .06),
+      padding: EdgeInsets.only(top: dh * .03),
       child: Row(
         children: [
           Column(
