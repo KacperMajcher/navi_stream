@@ -29,7 +29,7 @@ class Channel extends StatelessWidget {
                 // default image in case of an error loading the network image
                 errorBuilder: (context, exception, stackTrace) {
                   return Image.asset(
-                    'assets/logo_test.jpg',
+                    'assets/channel_logo_test.jpg',
                     height: dh * 0.055,
                     width: dw * 0.11,
                     fit: BoxFit.contain,
