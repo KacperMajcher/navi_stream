@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navi_stream/app/injection_container.dart';
-import 'package:navi_stream/features/presentation/pages/channel.dart';
+import 'package:navi_stream/features/presentation/pages/widgets/channel.dart';
 import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart';
 import 'package:navi_stream/features/presentation/pages/cubit/home_state.dart';
 
