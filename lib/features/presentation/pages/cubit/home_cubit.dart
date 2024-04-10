@@ -9,24 +9,34 @@ class HomeCubit extends Cubit<HomeState> {
     required this.packagesRepository,
     required this.channelsRepository,
   }) : super(
-          const HomeState(status: Status.loading),
+          const HomeState(
+            status: Status.loading,
+          ),
         );
   final PackagesRepository packagesRepository;
   final ChannelsRepository channelsRepository;
 
   Future<void> init() async {
-    final packages = await packagesRepository.fetchPackages();
+    try {
+      final packages = await packagesRepository.fetchPackages();
 
-    final packageIds = packages.map((package) => package.id).toList();
+      final packageIds = packages.map((package) => package.id).toList();
 
-    final channelModel = await channelsRepository.getChannelModels(
-      packageIds: packageIds,
-    );
-    emit(
-      HomeState(
-        status: Status.success,
-        channelModel: channelModel,
-      ),
-    );
+      final channelModel = await channelsRepository.getChannelModels(
+        packageIds: packageIds,
+      );
+      emit(
+        HomeState(
+          status: Status.success,
+          channelModel: channelModel,
+        ),
+      );
+    } catch (e) {
+      emit(
+        const HomeState(
+          status: Status.error,
+        ),
+      );
+    }
   }
 }
