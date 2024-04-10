@@ -5,15 +5,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PackagesRepository {
   PackagesRepository(
     this.dataSource,
+    this.prefs,
   );
   final PackagesRemoteDioDataSource dataSource;
+  final SharedPreferences prefs;
 
   Future<List<PackageModel>> fetchPackages() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String token = prefs.getString('token')!;
-      final String ouid = prefs.getString('ouid')!;
-      final int userId = prefs.getInt('userId')!;
+      final String? token = prefs.getString('token');
+      final String? ouid = prefs.getString('ouid');
+      final int? userId = prefs.getInt('userId');
+
+      // Ensure none of the required values are null
+      if (token == null || ouid == null || userId == null) {
+        throw Exception('Missing authentication details');
+      }
 
       final response = await dataSource.fetchPackages(
         ouid,
