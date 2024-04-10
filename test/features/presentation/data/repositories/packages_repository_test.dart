@@ -28,7 +28,6 @@ void main() {
 
     packagesRepository = PackagesRepository(
       mockDataSource,
-      mockSharedPreferences,
     );
 
     SharedPreferences.setMockInitialValues({});
