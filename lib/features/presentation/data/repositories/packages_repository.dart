@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:navi_stream/features/presentation/data/data_sources/packages_remote_data_source.dart';
 import 'package:navi_stream/features/presentation/data/models/package_model.dart';
 
@@ -13,29 +12,27 @@ class PackagesRepository {
     String token,
   ) async {
     try {
-      Response<dynamic> response = await dataSource.fetchPackages(
+      final response = await dataSource.fetchPackages(
         ouid,
         userId,
-        token,
+        'Bearer $token',
+        'Mobile',
       );
 
-      if (response.statusCode == 200) {
-        // get data
-        final List<dynamic> packageList = response.data['data'];
+      // response is already the JSON body here
+      final List<dynamic> packageList = response['data'];
 
-        // transfrom json list into models
-        final List<PackageModel> packages =
-            packageList.map((data) => PackageModel.fromJson(data)).toList();
+      // transfrom json list into models
+      final List<PackageModel> packages =
+          packageList.map((data) => PackageModel.fromJson(data)).toList();
 
-        // filter packages, we dont need non purchased packages
-        final List<PackageModel> purchasedPackages =
-            packages.where((package) => package.purchased != null).toList();
-        return purchasedPackages;
-      } else {
-        throw Exception('Failed to fetch packages');
-      }
+      // filter packages, we dont need non purchased packages
+      final List<PackageModel> purchasedPackages =
+          packages.where((package) => package.purchased != null).toList();
+
+      return purchasedPackages;
     } catch (e) {
-      throw Exception(e);
+      throw Exception('Failed to fetch packages: $e');
     }
   }
 }

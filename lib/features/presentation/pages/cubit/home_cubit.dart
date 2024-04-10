@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/presentation/pages/cubit/channels_cubit.dart';
 import 'package:navi_stream/features/presentation/pages/cubit/home_state.dart';
 import 'package:navi_stream/features/presentation/pages/cubit/packages_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit({
@@ -14,12 +14,13 @@ class HomeCubit extends Cubit<HomeState> {
         );
   final PackagesCubit packagesCubit;
   final ChannelsCubit channelsCubit;
-  final storage = const FlutterSecureStorage();
 
   Future<void> init() async {
-    final String? token = await storage.read(key: 'token');
-    final String? ouid = await storage.read(key: 'ouid');
-    final String? userId = await storage.read(key: 'userId');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final String? token = prefs.getString('token');
+    final String? ouid = prefs.getString('ouid');
+    final String? userId = prefs.getString('userId');
 
     if (token != null && ouid != null && userId != null) {
       await packagesCubit.fetchPackages(
