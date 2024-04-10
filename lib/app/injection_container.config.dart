@@ -11,8 +11,8 @@
 import 'package:dio/dio.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:navi_stream/app/injection_container.dart' as _i14;
-import 'package:navi_stream/features/auth/data/data_source/login_data_source.dart'
+import 'package:navi_stream/app/injection_container.dart' as _i12;
+import 'package:navi_stream/features/auth/data/data_source/login_remote_data_source.dart'
     as _i3;
 import 'package:navi_stream/features/auth/data/repositories/login_repository.dart'
     as _i4;
@@ -26,11 +26,7 @@ import 'package:navi_stream/features/presentation/data/repositories/channel_repo
     as _i10;
 import 'package:navi_stream/features/presentation/data/repositories/packages_repository.dart'
     as _i8;
-import 'package:navi_stream/features/presentation/pages/cubit/channels_cubit.dart'
-    as _i12;
 import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart'
-    as _i13;
-import 'package:navi_stream/features/presentation/pages/cubit/packages_cubit.dart'
     as _i11;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -45,9 +41,9 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
-    gh.factory<_i3.LoginDataSource>(() => _i3.LoginDataSource());
+    gh.factory<_i3.LoginRemoteDataSource>(() => _i3.LoginRemoteDataSource());
     gh.factory<_i4.LoginRepository>(
-        () => _i4.LoginRepository(gh<_i3.LoginDataSource>()));
+        () => _i4.LoginRepository(gh<_i3.LoginRemoteDataSource>()));
     gh.factory<String>(
       () => registerModule.baseUrl,
       instanceName: 'BaseUrl',
@@ -62,18 +58,14 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i8.PackagesRepository(gh<_i7.PackagesRemoteDioDataSource>()));
     gh.factory<_i9.ChannelsRemoteDataSource>(
         () => _i9.ChannelsRemoteDataSource(gh<_i5.Dio>()));
-    gh.factory<_i10.ChannelsRepository>(() => _i10.ChannelsRepository(
-        remoteDataSource: gh<_i9.ChannelsRemoteDataSource>()));
-    gh.factory<_i11.PackagesCubit>(
-        () => _i11.PackagesCubit(gh<_i8.PackagesRepository>()));
-    gh.factory<_i12.ChannelsCubit>(
-        () => _i12.ChannelsCubit(gh<_i10.ChannelsRepository>()));
-    gh.factory<_i13.HomeCubit>(() => _i13.HomeCubit(
-          packagesCubit: gh<_i11.PackagesCubit>(),
-          channelsCubit: gh<_i12.ChannelsCubit>(),
+    gh.factory<_i10.ChannelsRepository>(
+        () => _i10.ChannelsRepository(gh<_i9.ChannelsRemoteDataSource>()));
+    gh.factory<_i11.HomeCubit>(() => _i11.HomeCubit(
+          packagesRepository: gh<_i8.PackagesRepository>(),
+          channelsRepository: gh<_i10.ChannelsRepository>(),
         ));
     return this;
   }
 }
 
-class _$RegisterModule extends _i14.RegisterModule {}
+class _$RegisterModule extends _i12.RegisterModule {}

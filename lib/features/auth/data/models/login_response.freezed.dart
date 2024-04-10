@@ -23,7 +23,7 @@ mixin _$LoginResponse {
   String get token => throw _privateConstructorUsedError;
   String get ouid => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  String get userId => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,8 +37,7 @@ abstract class $LoginResponseCopyWith<$Res> {
           LoginResponse value, $Res Function(LoginResponse) then) =
       _$LoginResponseCopyWithImpl<$Res, LoginResponse>;
   @useResult
-  $Res call(
-      {String token, String ouid, @JsonKey(name: 'user_id') String userId});
+  $Res call({String token, String ouid, @JsonKey(name: 'user_id') int userId});
 }
 
 /// @nodoc
@@ -70,7 +69,7 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ) as $Val);
   }
 }
@@ -83,8 +82,7 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
       __$$LoginResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String token, String ouid, @JsonKey(name: 'user_id') String userId});
+  $Res call({String token, String ouid, @JsonKey(name: 'user_id') int userId});
 }
 
 /// @nodoc
@@ -114,7 +112,7 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -136,7 +134,7 @@ class _$LoginResponseImpl implements _LoginResponse {
   final String ouid;
   @override
   @JsonKey(name: 'user_id')
-  final String userId;
+  final int userId;
 
   @override
   String toString() {
@@ -175,7 +173,7 @@ abstract class _LoginResponse implements LoginResponse {
   const factory _LoginResponse(
           {required final String token,
           required final String ouid,
-          @JsonKey(name: 'user_id') required final String userId}) =
+          @JsonKey(name: 'user_id') required final int userId}) =
       _$LoginResponseImpl;
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
@@ -187,7 +185,7 @@ abstract class _LoginResponse implements LoginResponse {
   String get ouid;
   @override
   @JsonKey(name: 'user_id')
-  String get userId;
+  int get userId;
   @override
   @JsonKey(ignore: true)
   _$$LoginResponseImplCopyWith<_$LoginResponseImpl> get copyWith =>

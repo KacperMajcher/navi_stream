@@ -21,7 +21,7 @@ class _PackagesRemoteDioDataSource implements PackagesRemoteDioDataSource {
   @override
   Future<dynamic> fetchPackages(
     String ouid,
-    String userId,
+    int userId,
     String token,
     String deviceClass,
   ) async {

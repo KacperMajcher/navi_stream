@@ -1,17 +1,20 @@
 import 'package:navi_stream/features/presentation/data/data_sources/packages_remote_data_source.dart';
 import 'package:navi_stream/features/presentation/data/models/package_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PackagesRepository {
+  PackagesRepository(
+    this.dataSource,
+  );
   final PackagesRemoteDioDataSource dataSource;
 
-  PackagesRepository(this.dataSource);
-
-  Future<List<PackageModel>> fetchPackages(
-    String ouid,
-    String userId,
-    String token,
-  ) async {
+  Future<List<PackageModel>> fetchPackages() async {
     try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String token = prefs.getString('token')!;
+      final String ouid = prefs.getString('ouid')!;
+      final int userId = prefs.getInt('userId')!;
+
       final response = await dataSource.fetchPackages(
         ouid,
         userId,

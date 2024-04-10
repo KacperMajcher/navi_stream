@@ -4,7 +4,7 @@ import 'package:navi_stream/core/constants/constants.dart';
 import 'package:navi_stream/features/auth/data/models/login_model.dart';
 
 @injectable
-class LoginDataSource {
+class LoginRemoteDataSource {
   Future<Response> login(LoginModel loginModel) async {
     const url = apiBaseURL + endpointLogin;
 
