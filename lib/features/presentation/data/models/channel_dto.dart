@@ -22,7 +22,7 @@ class ChannelDTO {
   Map<String, dynamic> toJson() => _$ChannelDTOToJson(this);
 
   // convert DTO
-  ChannelModel toDomain() {
+  ChannelModel convertToModel() {
     // if there is at least one element, find it - this will be our logo
     final int? cardLogoId = logos != null
         ? (logos!['NORMAL'] ??
