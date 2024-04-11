@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:navi_stream/core/constants/constants.dart';
-import 'package:navi_stream/features/presentation/data/models/channel_dto.dart';
-import 'package:navi_stream/features/presentation/data/models/channel_response.dart';
+import 'package:navi_stream/features/home/data/models/channel_dto.dart';
+import 'package:navi_stream/features/home/data/models/channel_response.dart';
 
 void main() {
   final testDTO = ChannelDTO(
@@ -20,39 +20,60 @@ void main() {
     }
   };
 
-  group('ChannelResponse tests', () {
-    group('instantiation test', () {
-      test('should correctly instantiate', () {
-        final result = ChannelResponse(data: [testDTO]);
+  group(
+    'ChannelResponse tests',
+    () {
+      group(
+        'instantiation test',
+        () {
+          test(
+            'should correctly instantiate',
+            () {
+              final result = ChannelResponse(data: [testDTO]);
 
-        expect(result.data.first, testDTO);
-        expect(result.data.length, 1);
-      });
-    });
+              expect(result.data.first, testDTO);
+              expect(result.data.length, 1);
+            },
+          );
+        },
+      );
 
-    group('serialization tests', () {
-      test('should serialize to JSON', () {
-        final jsonMap = testDTO.toJson();
+      group(
+        'serialization tests',
+        () {
+          test(
+            'should serialize to JSON',
+            () {
+              final jsonMap = testDTO.toJson();
 
-        expect(jsonMap, testDTOJson);
-      });
+              expect(jsonMap, testDTOJson);
+            },
+          );
 
-      test('should deserialize from JSON', () {
-        final result = ChannelDTO.fromJson(testDTOJson);
+          test(
+            'should deserialize from JSON',
+            () {
+              final result = ChannelDTO.fromJson(testDTOJson);
 
-        expect(result.id, testDTO.id);
-        expect(result.name, testDTO.name);
-        expect(result.logos, testDTO.logos);
-      });
+              expect(result.id, testDTO.id);
+              expect(result.name, testDTO.name);
+              expect(result.logos, testDTO.logos);
+            },
+          );
 
-      test('convertToModel should return ChannelModel', () {
-        final result = testDTO.convertToModel();
+          test(
+            'convertToModel should return ChannelModel',
+            () {
+              final result = testDTO.convertToModel();
 
-        expect(result.channelName, 'HBO GO');
-        expect(result.logoId, 123);
-        expect(result.channelLogo,
-            '${apiBaseURL}v1/global/images/123?$logoAccessKey');
-      });
-    });
-  });
+              expect(result.channelName, 'HBO GO');
+              expect(result.logoId, 123);
+              expect(result.channelLogo,
+                  '${apiBaseURL}v1/global/images/123?$logoAccessKey');
+            },
+          );
+        },
+      );
+    },
+  );
 }

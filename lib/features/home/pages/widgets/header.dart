@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:navi_stream/utils/text_suffix.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -38,14 +38,4 @@ class Header extends StatelessWidget {
       ),
     );
   }
-}
-
-TextStyle suffix(fontSize, color, fontWeight) {
-  return GoogleFonts.inter(
-    textStyle: TextStyle(
-      color: color,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-    ),
-  );
 }

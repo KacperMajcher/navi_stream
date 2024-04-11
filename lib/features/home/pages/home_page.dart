@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navi_stream/app/injection_container.dart';
-import 'package:navi_stream/features/presentation/pages/widgets/bottom_navigation_bar.dart';
-import 'package:navi_stream/features/presentation/pages/widgets/channel.dart';
-import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart';
-import 'package:navi_stream/features/presentation/pages/cubit/home_state.dart';
-import 'package:navi_stream/features/presentation/pages/widgets/channel_player.dart';
-import 'package:navi_stream/features/presentation/pages/widgets/header.dart';
-import 'package:navi_stream/features/presentation/pages/widgets/search_bar.dart';
+import 'package:navi_stream/features/home/pages/widgets/bottom_navigation_bar.dart';
+import 'package:navi_stream/features/home/pages/widgets/channel.dart';
+import 'package:navi_stream/features/home/pages/cubit/home_cubit.dart';
+import 'package:navi_stream/features/home/pages/cubit/home_state.dart';
+import 'package:navi_stream/features/home/pages/widgets/channel_player.dart';
+import 'package:navi_stream/features/home/pages/widgets/header.dart';
+import 'package:navi_stream/features/home/pages/widgets/search_bar.dart';
+import 'package:navi_stream/utils/text_suffix.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final double dw = MediaQuery.of(context).size.width;
     final double dh = MediaQuery.of(context).size.height;
+
     return BlocProvider(
       create: (context) => getIt<HomeCubit>()..init(),
       child: BlocBuilder<HomeCubit, HomeState>(
@@ -44,7 +46,10 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      left: dw * .05, right: dw * .05, bottom: dh * .03),
+                    left: dw * .05,
+                    right: dw * .05,
+                    bottom: dh * .03,
+                  ),
                   child: ListView(
                     children: [
                       const Header(),
@@ -60,11 +65,16 @@ class _HomePageState extends State<HomePage> {
                       if (!_isSearchBarFocused) ...[
                         Text(
                           'Recommended',
-                          style:
-                              suffix(dh * .025, Colors.black, FontWeight.w800),
+                          style: suffix(
+                            dh * .025,
+                            Colors.black,
+                            FontWeight.w800,
+                          ),
                         ),
                         GestureDetector(
-                          child: Image.asset('assets/trending.png'),
+                          child: Image.asset(
+                            'assets/trending.png',
+                          ),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => const ChannelPlayer(),
@@ -75,7 +85,11 @@ class _HomePageState extends State<HomePage> {
                       ],
                       Text(
                         'Live Channels',
-                        style: suffix(dh * .025, Colors.black, FontWeight.w800),
+                        style: suffix(
+                          dh * .025,
+                          Colors.black,
+                          FontWeight.w800,
+                        ),
                       ),
                       ListView.builder(
                         shrinkWrap: true,
@@ -83,7 +97,9 @@ class _HomePageState extends State<HomePage> {
                         itemCount: state.channelModel.length,
                         itemBuilder: (context, index) {
                           final channelModel = state.channelModel[index];
-                          return Channel(channelModel: channelModel);
+                          return Channel(
+                            channelModel: channelModel,
+                          );
                         },
                       ),
                       const Divider(

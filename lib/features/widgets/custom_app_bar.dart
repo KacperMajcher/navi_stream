@@ -16,6 +16,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     final double dw = MediaQuery.of(context).size.width;
+
     return AppBar(
       leading: IconButton(
         onPressed: () {

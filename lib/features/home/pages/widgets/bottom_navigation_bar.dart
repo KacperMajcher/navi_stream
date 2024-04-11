@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navi_stream/features/presentation/pages/home_page.dart';
+import 'package:navi_stream/features/home/pages/home_page.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({Key? key}) : super(key: key);
@@ -66,12 +66,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   BottomNavigationBarItem items(String assetIcon, int index) {
     return BottomNavigationBarItem(
-        icon: Image.asset(
-          'assets/bottom_navigation_bar_icons/$assetIcon.png',
-          color: CustomBottomNavigationBar._selectedIndex == index
-              ? const Color(0xFF887EF1)
-              : const Color(0xFF515257),
-        ),
-        label: '');
+      icon: Image.asset(
+        'assets/bottom_navigation_bar_icons/$assetIcon.png',
+        color: CustomBottomNavigationBar._selectedIndex == index
+            ? const Color(0xFF887EF1)
+            : const Color(0xFF515257),
+      ),
+      label: '',
+    );
   }
 }

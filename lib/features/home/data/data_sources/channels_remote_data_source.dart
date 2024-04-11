@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:navi_stream/features/presentation/data/models/channel_response.dart';
+import 'package:navi_stream/features/home/data/models/channel_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'channels_remote_data_source.g.dart';

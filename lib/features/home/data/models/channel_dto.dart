@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:navi_stream/core/constants/constants.dart';
-import 'package:navi_stream/features/presentation/data/models/channel_model.dart';
+import 'package:navi_stream/features/home/data/models/channel_model.dart';
 
 part 'channel_dto.g.dart';
 
@@ -21,9 +21,7 @@ class ChannelDTO {
 
   Map<String, dynamic> toJson() => _$ChannelDTOToJson(this);
 
-  // convert DTO
   ChannelModel convertToModel() {
-    // if there is at least one element, find it - this will be our logo
     final int? cardLogoId = logos != null
         ? (logos!['NORMAL'] ??
             logos!['CARD'] ??
@@ -35,7 +33,7 @@ class ChannelDTO {
       logoId: cardLogoId,
       channelLogo: cardLogoId != null
           ? '${apiBaseURL}v1/global/images/$cardLogoId?$logoAccessKey'
-          : '${apiBaseURL}v1/global/images/5638?$logoAccessKey', // default image path
+          : '${apiBaseURL}v1/global/images/5638?$logoAccessKey',
     );
   }
 }

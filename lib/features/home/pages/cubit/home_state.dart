@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:navi_stream/core/constants/enums.dart';
-import 'package:navi_stream/features/presentation/data/models/channel_model.dart';
+import 'package:navi_stream/features/home/data/models/channel_model.dart';
 
 part 'home_state.freezed.dart';
 part 'home_state.g.dart';

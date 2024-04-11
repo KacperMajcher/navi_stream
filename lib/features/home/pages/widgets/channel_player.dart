@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:navi_stream/core/constants/constants.dart';
+import 'package:navi_stream/features/home/pages/widgets/video_controls.dart';
 import 'package:video_player/video_player.dart';
 
 class ChannelPlayer extends StatefulWidget {
@@ -18,19 +20,19 @@ final url = Uri.parse(kIsWeb
     ? 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
     : decodedUrl);
 
-/*
-D E C O D I N G
-The web does not support the decoded link format.
-When opening in the browser, display the link in .mp4 format.
-In the case of a mobile application, display the decoded video.
-*/
-
 class ChannelPlayerState extends State<ChannelPlayer> {
   late VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
+
+    log(kIsWeb
+        ? '''Browsers in the current technological stack are unable to play the 
+        decoded video format, so I'm providing a fallback video to display on the web. 
+        If you want to see the original decoded video, please run a mobile emulator.'''
+        : 'Welcome to the app, I have a specially decoded video for you.');
+
     SystemChrome.setPreferredOrientations(
       [
         DeviceOrientation.landscapeRight,
@@ -80,64 +82,5 @@ class ChannelPlayerState extends State<ChannelPlayer> {
     ]);
     _controller.dispose();
     super.dispose();
-  }
-}
-
-class VideoControls extends StatelessWidget {
-  final VideoPlayerController controller;
-  final VoidCallback onBack;
-  const VideoControls({
-    Key? key,
-    required this.controller,
-    required this.onBack,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Positioned(
-          top: 20,
-          left: 20,
-          child: InkWell(
-            onTap: onBack,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Colors.black45,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-        Center(
-          child: IconButton(
-            icon: Icon(
-              controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              if (controller.value.isPlaying) {
-                controller.pause();
-              } else {
-                controller.play();
-              }
-            },
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: VideoProgressIndicator(
-            controller,
-            allowScrubbing: true,
-            padding: const EdgeInsets.only(bottom: 8),
-          ),
-        ),
-      ],
-    );
   }
 }

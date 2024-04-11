@@ -12,11 +12,15 @@ class LoginButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+        backgroundColor: MaterialStateProperty.all<Color>(
+          Colors.green,
+        ),
       ),
       child: const Text(
         'Login',
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(
+          color: Colors.black,
+        ),
       ),
     );
   }

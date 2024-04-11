@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:navi_stream/app/injection_container.dart';
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_cubit.dart';
 import 'package:navi_stream/features/auth/presentation/pages/login_page.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/custom_button.dart';
+import 'package:navi_stream/utils/text_suffix.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -24,7 +24,11 @@ class WelcomePage extends StatelessWidget {
           Center(
             child: Text(
               'Your seamless navigation\nto endless entertainment!',
-              style: suffix(dh * .023, Colors.black, FontWeight.w800),
+              style: suffix(
+                dh * .023,
+                Colors.black,
+                FontWeight.w800,
+              ),
             ),
           ),
           SizedBox(height: dh * .1),
@@ -48,24 +52,26 @@ class WelcomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Don't have account? ",
-                  style: suffix(dh * .014, Colors.grey, FontWeight.normal)),
-              Text("Create now",
-                  style: suffix(dh * .014, Colors.black, FontWeight.bold)),
+              Text(
+                "Don't have account? ",
+                style: suffix(
+                  dh * .014,
+                  Colors.grey,
+                  FontWeight.normal,
+                ),
+              ),
+              Text(
+                "Create now",
+                style: suffix(
+                  dh * .014,
+                  Colors.black,
+                  FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ],
       ),
     );
   }
-}
-
-TextStyle suffix(fontSize, color, fontWeight) {
-  return GoogleFonts.inter(
-    textStyle: TextStyle(
-      color: color,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-    ),
-  );
 }

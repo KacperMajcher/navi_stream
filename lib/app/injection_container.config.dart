@@ -18,15 +18,15 @@ import 'package:navi_stream/features/auth/data/repositories/login_repository.dar
     as _i4;
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_cubit.dart'
     as _i6;
-import 'package:navi_stream/features/presentation/data/data_sources/channels_remote_data_source.dart'
+import 'package:navi_stream/features/home/data/data_sources/channels_remote_data_source.dart'
     as _i9;
-import 'package:navi_stream/features/presentation/data/data_sources/packages_remote_data_source.dart'
+import 'package:navi_stream/features/home/data/data_sources/packages_remote_data_source.dart'
     as _i7;
-import 'package:navi_stream/features/presentation/data/repositories/channel_repository.dart'
+import 'package:navi_stream/features/home/data/repositories/channel_repository.dart'
     as _i10;
-import 'package:navi_stream/features/presentation/data/repositories/packages_repository.dart'
+import 'package:navi_stream/features/home/data/repositories/packages_repository.dart'
     as _i8;
-import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart'
+import 'package:navi_stream/features/home/pages/cubit/home_cubit.dart'
     as _i11;
 
 extension GetItInjectableX on _i1.GetIt {

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:navi_stream/features/presentation/data/models/channel_dto.dart';
+import 'package:navi_stream/features/home/data/models/channel_dto.dart';
 
 part 'channel_response.freezed.dart';
 part 'channel_response.g.dart';

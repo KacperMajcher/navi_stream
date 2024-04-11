@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:navi_stream/utils/text_suffix.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -36,11 +36,10 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: GoogleFonts.inter(
-          textStyle: TextStyle(
-              color: Colors.white,
-              fontSize: dh * .0175,
-              fontWeight: FontWeight.w600),
+        style: suffix(
+          dh * .0175,
+          Colors.white,
+          FontWeight.w600,
         ),
       ),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:navi_stream/features/presentation/data/repositories/channel_repository.dart';
-import 'package:navi_stream/features/presentation/data/repositories/packages_repository.dart';
-import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart';
-import 'package:navi_stream/features/presentation/pages/cubit/home_state.dart';
+import 'package:navi_stream/features/home/data/repositories/channel_repository.dart';
+import 'package:navi_stream/features/home/data/repositories/packages_repository.dart';
+import 'package:navi_stream/features/home/pages/cubit/home_cubit.dart';
+import 'package:navi_stream/features/home/pages/cubit/home_state.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 
 class MockPackagesRepository extends Mock implements PackagesRepository {}
@@ -25,14 +25,20 @@ void main() {
     },
   );
 
-  group('HoginState tests', () {
-    test('initial state is HomeState.loading', () {
-      expect(
-        sut.state,
-        const HomeState(
-          status: Status.loading,
-        ),
+  group(
+    'HoginState tests',
+    () {
+      test(
+        'initial state is HomeState.loading',
+        () {
+          expect(
+            sut.state,
+            const HomeState(
+              status: Status.loading,
+            ),
+          );
+        },
       );
-    });
-  });
+    },
+  );
 }

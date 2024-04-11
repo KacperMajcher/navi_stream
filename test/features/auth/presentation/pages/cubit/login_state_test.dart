@@ -8,20 +8,25 @@ import 'package:navi_stream/features/auth/presentation/pages/cubit/login_state.d
 class MockLoginRepository extends Mock implements LoginRepository {}
 
 void main() {
-  group('LoginState tests', () {
-    final repository = MockLoginRepository();
+  group(
+    'LoginState tests',
+    () {
+      final repository = MockLoginRepository();
 
-    test('initial state is LoginState.initial', () {
-      final loginCubit = LoginCubit(
-        loginRepository: repository,
+      test(
+        'initial state is LoginState.initial',
+        () {
+          final loginCubit = LoginCubit(
+            loginRepository: repository,
+          );
+          expect(
+            loginCubit.state,
+            const LoginState(
+              status: LoginStatus.initial,
+            ),
+          );
+        },
       );
-      expect(
-        loginCubit.state,
-        const LoginState(
-          status: LoginStatus.initial,
-        ),
-      );
-      
-    });
-  });
+    },
+  );
 }

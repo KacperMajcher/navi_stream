@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:navi_stream/app/injection_container.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_cubit.dart';
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_state.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/custom_button.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/login_input_field.dart';
-import 'package:navi_stream/features/presentation/pages/home_page.dart';
+import 'package:navi_stream/features/home/pages/home_page.dart';
 import 'package:navi_stream/features/widgets/custom_app_bar.dart';
+import 'package:navi_stream/utils/text_suffix.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,20 +30,24 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
 
-    loginController.addListener(() {
-      activateLoginButton();
-    });
-    passwordController.addListener(() {
-      activateLoginButton();
-    });
+    loginController.addListener(() => activateLoginButton());
+    passwordController.addListener(() => activateLoginButton());
+  }
 
-    activateLoginButton(); // initial activation check
+  void activateLoginButton() {
+    final loginDataEntered =
+        loginController.text.isNotEmpty && passwordController.text.isNotEmpty;
+
+    setState(() {
+      buttonEnabled = loginDataEntered;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final double dw = MediaQuery.of(context).size.width;
     final double dh = MediaQuery.of(context).size.height;
+
     return BlocProvider(
       create: (context) => getIt<LoginCubit>(),
       child: BlocBuilder<LoginCubit, LoginState>(
@@ -59,9 +63,10 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: Text(
                       'Login',
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                            fontSize: dh * .04, fontWeight: FontWeight.w800),
+                      style: suffix(
+                        dh * .04,
+                        Colors.black,
+                        FontWeight.w800,
                       ),
                     ),
                   ),
@@ -79,9 +84,10 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: dh * .008),
                   Text(
                     'Forgot your password?',
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                          fontSize: dh * .015, fontWeight: FontWeight.w800),
+                    style: suffix(
+                      dh * .015,
+                      Colors.black,
+                      FontWeight.w800,
                     ),
                   ),
                   SizedBox(height: dh * .04),
@@ -112,9 +118,10 @@ class _LoginPageState extends State<LoginPage> {
                     if (state.status == LoginStatus.connecting) {
                       return const Center(
                         child: CustomButton(
-                            color: Color.fromARGB(255, 172, 167, 232),
-                            text: 'Log In',
-                            onPressed: null),
+                          color: Color(0xFFACA7E8),
+                          text: 'Log In',
+                          onPressed: null,
+                        ),
                       );
                     } else {
                       return Center(
@@ -124,14 +131,13 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: buttonEnabled
                               ? () {
                                   setState(() {
-                                    buttonEnabled =
-                                        false; // disable button when initiating login
+                                    buttonEnabled = false;
                                   });
                                   context.read<LoginCubit>().login(
                                         loginController.text,
                                         passwordController.text,
                                       );
-                                  //clear controllers in case of come back to the loginPage
+
                                   loginController.clear();
                                   passwordController.clear();
                                 }
@@ -146,12 +152,19 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         "Don't have account? ",
-                        style:
-                            suffix(dh * .014, Colors.grey, FontWeight.normal),
+                        style: suffix(
+                          dh * .014,
+                          Colors.grey,
+                          FontWeight.normal,
+                        ),
                       ),
                       Text(
                         "Create now",
-                        style: suffix(dh * .014, Colors.black, FontWeight.bold),
+                        style: suffix(
+                          dh * .014,
+                          Colors.black,
+                          FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -163,23 +176,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  void activateLoginButton() {
-    final loginDataEntered =
-        loginController.text.isNotEmpty && passwordController.text.isNotEmpty;
-
-    setState(() {
-      buttonEnabled = loginDataEntered;
-    });
-  }
-}
-
-TextStyle suffix(fontSize, color, fontWeight) {
-  return GoogleFonts.inter(
-    textStyle: TextStyle(
-      color: color,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-    ),
-  );
 }
