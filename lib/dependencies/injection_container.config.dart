@@ -11,7 +11,7 @@
 import 'package:dio/dio.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:navi_stream/app/injection_container.dart' as _i12;
+import 'package:navi_stream/dependencies/injection_container.dart' as _i12;
 import 'package:navi_stream/features/auth/data/data_source/login_remote_data_source.dart'
     as _i3;
 import 'package:navi_stream/features/auth/data/repositories/login_repository.dart'
@@ -26,8 +26,7 @@ import 'package:navi_stream/features/home/data/repositories/channel_repository.d
     as _i10;
 import 'package:navi_stream/features/home/data/repositories/packages_repository.dart'
     as _i8;
-import 'package:navi_stream/features/home/pages/cubit/home_cubit.dart'
-    as _i11;
+import 'package:navi_stream/features/home/pages/cubit/home_cubit.dart' as _i11;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt

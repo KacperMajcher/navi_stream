@@ -50,7 +50,7 @@ class Channel extends StatelessWidget {
             Text(
               channelModel.channelName,
               style: suffix(
-                16,
+                16.0,
                 Colors.black,
                 FontWeight.w500,
               ),

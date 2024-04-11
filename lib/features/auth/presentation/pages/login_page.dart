@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:navi_stream/app/injection_container.dart';
+import 'package:navi_stream/dependencies/injection_container.dart';
 import 'package:navi_stream/core/constants/enums.dart';
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_cubit.dart';
 import 'package:navi_stream/features/auth/presentation/pages/cubit/login_state.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/custom_button.dart';
 import 'package:navi_stream/features/auth/presentation/widgets/login_input_field.dart';
 import 'package:navi_stream/features/home/pages/home_page.dart';
-import 'package:navi_stream/features/widgets/custom_app_bar.dart';
+import 'package:navi_stream/utils/custom_app_bar.dart';
 import 'package:navi_stream/utils/text_suffix.dart';
 
 class LoginPage extends StatefulWidget {

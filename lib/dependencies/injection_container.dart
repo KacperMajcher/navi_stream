@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:navi_stream/app/injection_container.config.dart';
+import 'package:navi_stream/dependencies/injection_container.config.dart';
 import 'package:navi_stream/core/constants/constants.dart';
 
 final getIt = GetIt.instance;

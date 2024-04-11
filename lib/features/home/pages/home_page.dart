@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:navi_stream/app/injection_container.dart';
+import 'package:navi_stream/dependencies/injection_container.dart';
 import 'package:navi_stream/features/home/pages/widgets/bottom_navigation_bar.dart';
 import 'package:navi_stream/features/home/pages/widgets/channel.dart';
 import 'package:navi_stream/features/home/pages/cubit/home_cubit.dart';
@@ -72,8 +72,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         GestureDetector(
-                          child: Image.asset(
-                            'assets/trending.png',
+                          child: SizedBox(
+                            height: dh * .25,
+                            child: Image.asset(
+                              'assets/trending.png',
+                            ),
                           ),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
@@ -91,16 +94,18 @@ class _HomePageState extends State<HomePage> {
                           FontWeight.w800,
                         ),
                       ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.channelModel.length,
-                        itemBuilder: (context, index) {
-                          final channelModel = state.channelModel[index];
-                          return Channel(
-                            channelModel: channelModel,
-                          );
-                        },
+                      Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.channelModel.length,
+                          itemBuilder: (context, index) {
+                            final channelModel = state.channelModel[index];
+                            return Channel(
+                              channelModel: channelModel,
+                            );
+                          },
+                        ),
                       ),
                       const Divider(
                         color: Color(0xFFC9CACF),
