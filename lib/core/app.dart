@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navi_stream/features/auth/presentation/pages/login_page.dart';
+import 'package:navi_stream/features/auth/presentation/pages/welcome_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LoginPage(),
+      home: WelcomePage(),
     );
   }
 }

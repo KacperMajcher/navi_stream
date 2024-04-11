@@ -19,7 +19,9 @@ dependencies:
   shared_preferences: ^2.0.15
   json_annotation: ^4.8.1
   freezed_annotation: ^2.4.1
+  google_fonts: ^6.2.1
   video_player: ^2.8.5
+  flutter_screenutil: ^5.9.0
 
 
 
@@ -37,3 +39,6 @@ flutter:
   uses-material-design: true
   assets:
   - assets/
+  - assets/background_images/
+  - assets/navistream_logo/
+  - assets/bottom_navigation_bar_icons/
