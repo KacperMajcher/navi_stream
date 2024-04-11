@@ -11,13 +11,15 @@ class PackagesRepository {
   Future<List<PackageModel>> fetchPackages() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String token = prefs.getString('token')!;
-      final String ouid = prefs.getString('ouid')!;
-      final int userId = prefs.getInt('userId')!;
+      final String? token = prefs.getString('token');
+      final String? ouid = prefs.getString('ouid');
+      final int? userId = prefs.getInt('userId');
+
+      // Ensure none of the required values are null
 
       final response = await dataSource.fetchPackages(
-        ouid,
-        userId,
+        ouid!,
+        userId!,
         'Bearer $token',
         'Mobile',
       );
