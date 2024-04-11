@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:navi_stream/core/constants/constants.dart';
 import 'package:video_player/video_player.dart';
 
@@ -27,102 +27,57 @@ In the case of a mobile application, display the decoded video.
 
 class ChannelPlayerState extends State<ChannelPlayer> {
   late VideoPlayerController _controller;
-  bool _fullScreen = false;
 
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft,
+      ],
+    );
 
-    _controller = VideoPlayerController.networkUrl(url);
-
-    _controller.addListener(() {
-      setState(() {});
-    });
-    _controller.setLooping(true);
-    _controller.initialize().then((_) => setState(() {}));
-    _controller.play();
-
-    log(kIsWeb
-        ? 'Welcome in the web, I\'ll play a link with a browser-supported format.'
-        : 'Welcome to the app, I have a specially decoded video for you.');
+    _controller = VideoPlayerController.networkUrl(url)
+      ..addListener(() => setState(() {}))
+      ..setLooping(true)
+      ..initialize().then(
+        (_) => setState(
+          () => _controller.play(),
+        ),
+      );
   }
 
   @override
   Widget build(BuildContext context) {
-    final double dh = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: ListView(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: dh * .05),
-          ),
-          AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: <Widget>[
-                VideoPlayer(_controller),
-                VideoProgressIndicator(
-                  _controller,
-                  allowScrubbing: true,
-                ),
-                VideoControls(
-                  controller: _controller,
-                  isFullScreen: _fullScreen,
-                  toggleFullScreen: () {
-                    setState(() {
-                      _fullScreen = !_fullScreen;
-                    });
-
-                    if (_fullScreen) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          fullscreenDialog: true,
-                          builder: (context) => Scaffold(
-                            body: Center(
-                              child: AspectRatio(
-                                aspectRatio: _controller.value.aspectRatio,
-                                child: Stack(
-                                  alignment: Alignment.bottomCenter,
-                                  children: <Widget>[
-                                    VideoPlayer(_controller),
-                                    VideoProgressIndicator(
-                                      _controller,
-                                      allowScrubbing: true,
-                                    ),
-                                    VideoControls(
-                                      controller: _controller,
-                                      isFullScreen: _fullScreen,
-                                      toggleFullScreen: () {
-                                        setState(() {
-                                          _fullScreen = !_fullScreen;
-                                        });
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      Navigator.pop(context);
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
+      backgroundColor: Colors.black,
+      body: Center(
+        child: _controller.value.isInitialized
+            ? Stack(
+                alignment: Alignment.center,
+                children: [
+                  AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  ),
+                  VideoControls(
+                    controller: _controller,
+                    onBack: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              )
+            : const CircularProgressIndicator(),
       ),
     );
   }
 
   @override
   void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     _controller.dispose();
     super.dispose();
   }
@@ -130,29 +85,33 @@ class ChannelPlayerState extends State<ChannelPlayer> {
 
 class VideoControls extends StatelessWidget {
   final VideoPlayerController controller;
-  final bool isFullScreen;
-  final VoidCallback toggleFullScreen;
-
+  final VoidCallback onBack;
   const VideoControls({
-    required this.controller,
-    required this.isFullScreen,
-    required this.toggleFullScreen,
     Key? key,
+    required this.controller,
+    required this.onBack,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
+      children: <Widget>[
         Positioned(
-          right: 0,
-          bottom: 0,
-          child: IconButton(
-            icon: Icon(
-              isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
-              color: Colors.white,
+          top: 20,
+          left: 20,
+          child: InkWell(
+            onTap: onBack,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Colors.black45,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: Colors.white,
+              ),
             ),
-            onPressed: toggleFullScreen,
           ),
         ),
         Center(
@@ -168,6 +127,14 @@ class VideoControls extends StatelessWidget {
                 controller.play();
               }
             },
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: VideoProgressIndicator(
+            controller,
+            allowScrubbing: true,
+            padding: const EdgeInsets.only(bottom: 8),
           ),
         ),
       ],

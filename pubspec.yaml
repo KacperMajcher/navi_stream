@@ -21,6 +21,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   google_fonts: ^6.2.1
   video_player: ^2.8.5
+  flutter_screenutil: ^5.9.0
 
 
 dev_dependencies:

@@ -5,6 +5,7 @@ import 'package:navi_stream/features/presentation/pages/widgets/bottom_navigatio
 import 'package:navi_stream/features/presentation/pages/widgets/channel.dart';
 import 'package:navi_stream/features/presentation/pages/cubit/home_cubit.dart';
 import 'package:navi_stream/features/presentation/pages/cubit/home_state.dart';
+import 'package:navi_stream/features/presentation/pages/widgets/channel_player.dart';
 import 'package:navi_stream/features/presentation/pages/widgets/header.dart';
 import 'package:navi_stream/features/presentation/pages/widgets/search_bar.dart';
 
@@ -62,7 +63,14 @@ class _HomePageState extends State<HomePage> {
                           style:
                               suffix(dh * .025, Colors.black, FontWeight.w800),
                         ),
-                        Image.asset('assets/trending.png'),
+                        GestureDetector(
+                          child: Image.asset('assets/trending.png'),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const ChannelPlayer(),
+                            ),
+                          ),
+                        ),
                         SizedBox(height: dh * .025),
                       ],
                       Text(
