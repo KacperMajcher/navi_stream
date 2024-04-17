@@ -6,16 +6,19 @@
 
 <p>What can we expect in the near future?</p>
 
-I plan to finish testing, add more screens, and possibly integrate the entire application into Riverpod for practice.
+I plan to finish testing [✅], add more screens, and possibly integrate the entire application into Riverpod for practice.
 
 <h2> Features</h2>
 
 Here're some of the project's best features:
 
-*   Unit Tests
+
 *   Using Freezed GetIt Retrofit
 *   Clean Architecture
 *   Performance Optimizations
+*   100% Test Coverage
+  
+![image](https://github.com/KacperMajcher/navi_stream/assets/142928291/9109253e-be50-44c5-871b-eacbb0a5c0ce)
 
 <h2>🛠️ Installation Steps:</h2>
 
