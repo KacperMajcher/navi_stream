@@ -1,26 +1,30 @@
 import 'package:dio/dio.dart';
+import 'package:navi_stream/features/auth/data/data_source/auth_local_data_source.dart';
 import 'package:navi_stream/features/home/data/data_sources/channels_remote_data_source.dart';
 import 'package:navi_stream/features/home/data/models/channel_dto.dart';
 import 'package:navi_stream/features/home/data/models/channel_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ChannelsRepository {
-  ChannelsRepository(this.remoteDataSource);
+  ChannelsRepository(
+    this.remoteDataSource,
+    this.localDataSource,
+  );
+
   final ChannelsRemoteDataSource remoteDataSource;
+  final AuthLocalDataSource localDataSource;
 
   Future<List<ChannelModel>> getChannelModels({
     required List<int> packageIds,
   }) async {
     try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String token = prefs.getString('token')!;
-      final String ouid = prefs.getString('ouid')!;
+      final token = await localDataSource.getToken();
+      final ouid = await localDataSource.getOuid();
 
       final channels = await remoteDataSource.fetchChannels(
         token,
         ouid,
         packageIds,
-      ); 
+      );
 
       if (channels.response.statusCode == 200) {
         final List<ChannelDTO> channelDTOs = channels.data.data;

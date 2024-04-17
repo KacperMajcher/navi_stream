@@ -94,18 +94,16 @@ class _HomePageState extends State<HomePage> {
                           FontWeight.w800,
                         ),
                       ),
-                      Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.channelModel.length,
-                          itemBuilder: (context, index) {
-                            final channelModel = state.channelModel[index];
-                            return Channel(
-                              channelModel: channelModel,
-                            );
-                          },
-                        ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.channelModel.length,
+                        itemBuilder: (context, index) {
+                          final channelModel = state.channelModel[index];
+                          return Channel(
+                            channelModel: channelModel,
+                          );
+                        },
                       ),
                       const Divider(
                         color: Color(0xFFC9CACF),
