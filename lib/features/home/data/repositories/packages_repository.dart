@@ -1,23 +1,24 @@
+import 'package:navi_stream/features/auth/data/data_source/auth_local_data_source.dart';
 import 'package:navi_stream/features/home/data/data_sources/packages_remote_data_source.dart';
 import 'package:navi_stream/features/home/data/models/package_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class PackagesRepository {
   PackagesRepository(
     this.dataSource,
+    this.localDataSource,
   );
   final PackagesRemoteDioDataSource dataSource;
+  final AuthLocalDataSource localDataSource;
 
   Future<List<PackageModel>> fetchPackages() async {
     try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('token');
-      final String? ouid = prefs.getString('ouid');
-      final int? userId = prefs.getInt('userId');
+      final token = await localDataSource.getToken();
+      final ouid = await localDataSource.getOuid();
+      final userId = await localDataSource.getUserId();
 
       final response = await dataSource.fetchPackages(
-        ouid!,
-        userId!,
+        ouid,
+        userId,
         'Bearer $token',
         'Mobile',
       );
