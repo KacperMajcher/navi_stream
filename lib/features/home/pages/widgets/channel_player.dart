@@ -15,17 +15,27 @@ class ChannelPlayer extends StatefulWidget {
   ChannelPlayerState createState() => ChannelPlayerState();
 }
 
-String decodedUrl = utf8.decode(base64.decode(playerBase64));
-final url = Uri.parse(kIsWeb
-    ? 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
-    : decodedUrl);
-
 class ChannelPlayerState extends State<ChannelPlayer> {
   late VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
+
+    String decodeBase64(String base64String) {
+      if (base64String.length % 4 != 0) {
+        int padding = 4 - (base64String.length % 4);
+        base64String =
+            base64String.padRight(base64String.length + padding, '=');
+      }
+
+      return utf8.decode(base64.decode(base64String));
+    }
+
+    String decodedUrl = decodeBase64(playerBase64);
+    final url = Uri.parse(kIsWeb
+        ? 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
+        : decodedUrl);
 
     log(kIsWeb
         ? '''Browsers in the current technological stack are unable to play the 
