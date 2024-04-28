@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navi_stream/core/config.dart';
-import 'package:navi_stream/features/auth/presentation/pages/welcome_page.dart';
+import 'package:navi_stream/features/authButRiverpod/pages/welcome_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
