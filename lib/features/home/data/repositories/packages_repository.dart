@@ -1,4 +1,4 @@
-import 'package:navi_stream/features/auth/data/data_source/auth_local_data_source.dart';
+import 'package:navi_stream/features/authButRiverpod/services/storage_service.dart';
 import 'package:navi_stream/features/home/data/data_sources/packages_remote_data_source.dart';
 import 'package:navi_stream/features/home/data/models/package_model.dart';
 
@@ -8,7 +8,7 @@ class PackagesRepository {
     this.localDataSource,
   );
   final PackagesRemoteDioDataSource dataSource;
-  final AuthLocalDataSource localDataSource;
+  final StorageService localDataSource;
 
   Future<List<PackageModel>> fetchPackages() async {
     try {

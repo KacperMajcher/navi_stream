@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:navi_stream/features/auth/data/data_source/auth_local_data_source.dart';
+import 'package:navi_stream/features/authButRiverpod/services/storage_service.dart';
 import 'package:navi_stream/features/home/data/data_sources/channels_remote_data_source.dart';
 import 'package:navi_stream/features/home/data/models/channel_dto.dart';
 import 'package:navi_stream/features/home/data/models/channel_model.dart';
@@ -11,7 +11,7 @@ class ChannelsRepository {
   );
 
   final ChannelsRemoteDataSource remoteDataSource;
-  final AuthLocalDataSource localDataSource;
+  final StorageService localDataSource;
 
   Future<List<ChannelModel>> getChannelModels({
     required List<int> packageIds,
