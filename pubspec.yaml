@@ -23,6 +23,9 @@ dependencies:
   video_player: ^2.8.5
   mocktail: ^1.0.3
   flutter_screenutil: ^5.9.0
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  riverpod: ^2.5.1
 
 
 
@@ -37,6 +40,9 @@ dev_dependencies:
   freezed: ^2.5.1
   bloc_test: ^9.1.5
   analyzer: ^6.4.1
+  riverpod_generator: ^2.4.0
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
 
 flutter:
   uses-material-design: true
