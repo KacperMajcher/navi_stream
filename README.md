@@ -6,7 +6,7 @@
 
 <p>What can we expect in the near future?</p>
 
-I plan to finish testing [✅], add more screens, and possibly integrate the entire application into Riverpod for practice.
+I plan to add more screens and integrate the entire application into my own data base.
 
 <h2> Features</h2>
 
